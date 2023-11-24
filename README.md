@@ -13,9 +13,9 @@ A quick guide to my Project ->
 - ReactJS
 - JSX
 - react-router-dom
-- Font Awesome
-- Bootstrap
-- localStorage
+- tmdbapi
+- firebase
+- SCSS
 
 # Getting Started with Create React App
 
@@ -60,12 +60,3 @@ Click on
 npm start
 ``` 
 to run the website
-
-## Demo Video
-
-- [Link](https://app.gemoo.com/share/home?codeId=PY4xjeEm742yo)
-
-
-
-
-https://github.com/harsh-sangwan2003/movies-app/assets/84121947/397ec112-47a4-4992-9e39-f112d1e9898f.mp4
