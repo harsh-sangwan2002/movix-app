@@ -36,6 +36,12 @@ const DetailsBanner = ({ video, crew }) => {
         return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
     };
 
+    const handleDatabase = () => {
+
+        console.log(video);
+        console.log(crew);
+    }
+
     return (
         <div className="detailsBanner">
             {!loading ? (
@@ -66,11 +72,10 @@ const DetailsBanner = ({ video, crew }) => {
                                     </div>
                                     <div className="right">
                                         <div className="title">
-                                            {`${
-                                                data.name || data.title
-                                            } (${dayjs(
-                                                data?.release_date
-                                            ).format("YYYY")})`}
+                                            {`${data.name || data.title
+                                                } (${dayjs(
+                                                    data?.release_date
+                                                ).format("YYYY")})`}
                                         </div>
                                         <div className="subtitle">
                                             {data.tagline}
@@ -96,6 +101,9 @@ const DetailsBanner = ({ video, crew }) => {
                                                     Watch Trailer
                                                 </span>
                                             </div>
+                                            <button className="btn" onClick={handleDatabase}>
+                                                Add to database
+                                            </button>
                                         </div>
 
                                         <div className="overview">
