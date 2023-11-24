@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Login.scss";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../Context/AuthContext';
 import Alert from '@mui/material/Alert';
 
@@ -62,6 +62,8 @@ function Login() {
                 />
                 <button type="submit" onClick={handleClick}>Login</button>
             </form>
+
+            <span>Don't have an account? <Link to="/register" style={{color:'white'}}>Register</Link></span>
         </div>
     );
 }
