@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "./Register.scss";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
-import { storage, database } from "../../firebase";
+
 import Alert from '@mui/material/Alert';
+import newRequest from "../../utils/newRequest";
+import upload from "../../utils/upload";
 
 function Register() {
 
@@ -15,8 +16,7 @@ function Register() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const { signup } = useContext(AuthContext);
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleChange = async () => {
 
@@ -32,61 +32,29 @@ function Register() {
             return;
         }
 
+
+        const url = await upload(file);
+        setLoading(true);
+
         try {
 
-            setError('');
-            setLoading(true);
-
-            const userObj = await signup(email, password);
-            let uid = userObj.user.uid;
-
-            const uploadTask = storage.ref(`/users/${uid}/ProfileImage`).put(file);
-            uploadTask.on('state_changed', fn1, fn2, fn3);
-
-            function fn1(snapshot) {
-
-                let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log(`Upload is ${progress} done.`);
+            const user = {
+                email,
+                password,
+                name,
+                country,
+                img:url
             }
 
-            function fn2(err) {
+            await newRequest.post("/auth/register", user);
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            navigate("/");
 
-                setError('Please upload a profile image!');
-
-                setTimeout(() => {
-                    setError('');
-                }, 3000);
-
-                setLoading(false);
-            }
-
-            function fn3() {
-
-                uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-
-                    database.users.doc(uid).set({
-
-                        email: email,
-                        userId: uid,
-                        fullname: name,
-                        profileUrl: url,
-                        countryName: country,
-                        createdAt: database.getTimeStamp()
-                    })
-
-                    console.log(url);
-                })
-
-                setLoading(false);
-                history('/');
-            }
+            setLoading(false);
 
         } catch (err) {
-            setError(err);
-
-            setTimeout(() => {
-                setError('');
-            }, 3000);
+            console.log(err);
+            setLoading(false);
         }
     }
 
@@ -120,7 +88,7 @@ function Register() {
                     placeholder="Usa"
                     onChange={(e) => setCountry(e.target.value)}
                 />
-                <button type="submit" onClick={handleChange}>Register</button>
+                <button type="submit" onClick={handleChange} disabled={loading}>Register</button>
             </div>
         </div>
     );

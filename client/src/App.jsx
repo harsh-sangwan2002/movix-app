@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchDataFromApi } from "./utils/api";
 
@@ -14,7 +14,7 @@ import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import { AuthProvider } from './Context/AuthContext';
+
 import PrivateRoute from './components/private/PrivateRoute';
 
 function App() {
@@ -60,21 +60,20 @@ function App() {
     };
 
     return (
-        <AuthProvider>
-            <BrowserRouter>
-                <Header />
-                <Routes>
-                    <Route exact path="/login" element={<Login />} />
-                    <Route exact path="/register" element={<Register />} />
-                    <Route exact path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-                    <Route exact path="/:mediaType/:id" element={<PrivateRoute><Details /></PrivateRoute>} />
-                    <Route exact path="/search/:query" element={<PrivateRoute><SearchResult /></PrivateRoute>} />
-                    <Route exact path="/explore/:mediaType" element={<PrivateRoute><Explore /></PrivateRoute>} />
-                    <Route exact path="*" element={<PageNotFound />} />
-                </Routes>
-                <Footer />
-            </BrowserRouter>
-        </AuthProvider>
+        <BrowserRouter>
+            <Header />
+            <Routes>
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/register" element={<Register />} />
+                <Route exact path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+                <Route exact path="/:mediaType/:id" element={<PrivateRoute><Details /></PrivateRoute>} />
+                <Route exact path="/search/:query" element={<PrivateRoute><SearchResult /></PrivateRoute>} />
+                <Route exact path="/explore/:mediaType" element={<PrivateRoute><Explore /></PrivateRoute>} />
+                <Route exact path="*" element={<PageNotFound />} />
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+
     );
 }
 

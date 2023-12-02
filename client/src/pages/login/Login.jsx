@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from '../../Context/AuthContext';
 import Alert from '@mui/material/Alert';
+import newRequest from '../../utils/newRequest';
 
 function Login() {
 
@@ -10,20 +10,17 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState('');
-    const { login } = useContext(AuthContext);
-    const history = useNavigate();
+    const navigate = useNavigate();
 
 
     const handleClick = async () => {
 
         try {
 
-            setError('');
-            setLoading(true);
-
-            const res = await login(email, password);
-            setLoading(false);
-            history('/');
+            const res = await newRequest.post("auth/login", { email, password });
+            localStorage.setItem("currentUser", JSON.stringify(res.data));
+            console.log(res);
+            navigate("/");
 
         } catch (err) {
 
@@ -60,10 +57,10 @@ function Login() {
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" onClick={handleClick}>Login</button>
+                <button type="submit" onClick={handleClick} disabled={loading}>Login</button>
             </form>
 
-            <span>Don't have an account? <Link to="/register" style={{color:'white'}}>Register</Link></span>
+            <span>Don't have an account? <Link to="/register" style={{ color: 'white' }}>Register</Link></span>
         </div>
     );
 }

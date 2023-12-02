@@ -25,7 +25,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
     try {
 
-        const user = await User.findOne({ username: req.body.username });
+        const user = await User.findOne({ username: req.body.email });
 
         if (!user)
             return next(creatError(404, "User not found!"));
