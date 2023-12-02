@@ -9,7 +9,6 @@ import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
-import { AuthContext } from "../../Context/AuthContext";
 
 const Header = () => {
     const [show, setShow] = useState("top");
@@ -21,10 +20,18 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { user,logout } = useContext(AuthContext);
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    console.log(user);
+
+    useEffect(()=>{
+
+        user = JSON.parse(localStorage.getItem("currentUser"));
+        console.log(user);
+    })
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        user = JSON.parse(localStorage.getItem("currentUser"));
     }, [location]);
 
     const controlNavbar = () => {
@@ -42,6 +49,7 @@ const Header = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", controlNavbar);
+        user = JSON.parse(localStorage.getItem("currentUser"));
         return () => {
             window.removeEventListener("scroll", controlNavbar);
         };
@@ -76,8 +84,9 @@ const Header = () => {
     };
 
     const handlelogout = async () => {
-        await logout();
-        location('/login');
+        
+        localStorage.setItem("currentUser",null);
+        location('http://localhost:5173/login');
     }
 
     return (
