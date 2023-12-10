@@ -48,11 +48,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-``` 
-
 ## Usage
 
-This project showcases the movies fetched via tmdb API and manages the favourite movies of the user.
+Step into a cinematic universe where movies sourced from TMDB API shine in brilliance. Seamlessly managing your favorite movies, this project epitomizes elegance through its interface, curated to celebrate your cinematic journey.
 
 Click on
 
