@@ -8,6 +8,13 @@ A quick guide to my Project ->
 
 <img src = "./image.webp">
 
+## Description
+
+- Designed a full-stack Movix App, leveraging TMDB API for seamless movie data integration and enriched user experience.
+- Crafted a modern and responsive interface with ReactJS, JSX, and SCSS, simplifying movie exploration and selection.
+- Implemented Firebase for secure user authentication and hosting, providing a seamless and reliable platform.
+- Ensured effortless navigation using react-router-dom for a smooth and intuitive browsing experience.
+
 ## Tools Used
 
 - ReactJS
@@ -47,10 +54,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Usage
-
-Step into a cinematic universe where movies sourced from TMDB API shine in brilliance. Seamlessly managing your favorite movies, this project epitomizes elegance through its interface, curated to celebrate your cinematic journey.
 
 Click on
 
